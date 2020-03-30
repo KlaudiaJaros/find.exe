@@ -40,21 +40,19 @@ int findIndex(char *wordToFind, char *stringToSearch, int caseSensitive)
 	// for the case-insensitive mode:
 	char wordCopy[STRINGSIZE];
 	char stringCopy[STRINGSIZE];
+	strcpy(wordCopy, wordToFind);
+	strcpy(stringCopy, stringToSearch);
 	
 	if (!caseSensitive) // case-insensitive mode
 	{
-		strcpy(wordCopy, wordToFind);
-		strcpy(stringCopy, stringToSearch);
 		for (int i =0; i<strlen(wordCopy); i++)
 		{
-			wordCopy[i]=tolower(wordToFind[i]);
+			wordCopy[i]=tolower(wordCopy[i]);
 		}
 		for (int j =0; j<strlen(stringCopy); j++)
 		{
-			stringCopy[j]=tolower(stringToSearch[j]);
+			stringCopy[j]=tolower(stringCopy[j]);
 		}
-		strcpy(wordToFind, wordCopy);
-		strcpy(stringToSearch, stringCopy);
 	}
 	
 	// if the substring is bigger than the string, return -1:
@@ -66,7 +64,7 @@ int findIndex(char *wordToFind, char *stringToSearch, int caseSensitive)
 	{   // ensure the word you're looking for fits into the searched array:
 		while (wordIndex<wordSize && (stringSize-stringIndex)>=(wordSize-wordIndex))
 		{
-			if (wordToFind[wordIndex] == stringToSearch[stringIndex])
+			if (wordCopy[wordIndex] == stringCopy[stringIndex])
 			{
 				match=1;
 				checkAgain=1;
